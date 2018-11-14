@@ -29,44 +29,44 @@ echo
 echo "Single-End (SE) or Paired-End (PE)? Type SE or PE" 
 read end
 
-if [[ $end = SE ]];
-then
-echo "We need an absolute path to your FASTQ file"
-read FASTQ
+case $case in 
+	SE)
+		echo "We need an absolute path to your FASTQ file"
+		read FASTQ
 
-echo "We need an absolute path to your Barcode file"
-read BAR
+		echo "We need an absolute path to your Barcode file"
+		read BAR
 
-echo "We need an absolute path to your Reference file"
-read REF
+		echo "We need an absolute path to your Reference file"
+		read REF
 
-echo "Enter your ADAPTER sequence"
-read ADAP
+		echo "Enter your ADAPTER sequence"
+		read ADAP
+		;;
+	PE)	
+		echo "We need an absolute path to your 1st FASTQ file"
+		read FASTQ1
 
-fi
+		echo "We need an absolute path to your 2nd FASTQ file"
+		read FASTQ2
 
-if [[ $end = PE ]];
-then
-echo "We need an absolute path to your 1st FASTQ file"
-read FASTQ1
+		echo "We need an absolute path to your Barcode file"
+		read BARCODE
 
-echo "We need an absolute path to your 2nd FASTQ file"
-read FASTQ2
+		echo "We need an absolute path to your Reference file"
+		read REFERENCE
 
-echo "We need an absolute path to your Barcode file"
-read BARCODE
+		echo "We need your forward adapter to remove"
+		read ADAP1
 
-echo "We need an absolute path to your Reference file"
-read REFERENCE
-
-echo "We need your forward adapter to remove"
-read ADAP1
-
-echo "We need your reverse adapter to remove"
-read ADAP2
-
-fi
-
+		echo "We need your reverse adapter to remove"
+		read ADAP2
+	*)
+		echo "Wrong Input!"
+		;;
+	esac
+done 
+	
 #Step 2: Create a new directory called DeMulti which is where our work will be done. Create a .log file where each step in the pipeline can be viewed.
 
 echo "We will be working in the newly created DeMulti directory"
