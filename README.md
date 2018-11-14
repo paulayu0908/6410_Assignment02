@@ -43,6 +43,7 @@ For our pipeline script to run the following software tools must be installed
 4. Install, uninstall, configuration, and operating instructions
 
 Installation: 
+
 No installation process is required, simply download our script form its Github repository to execute.
 
 Running the script:  
@@ -51,16 +52,20 @@ Step 1 - Download from www.github/repository and save in your directory of choos
 
 Step 2 - Give executive permission to run script
 
-chmod +x /path/to/DNA-SeqV1.5.sh
+ chmod +x /path/to/DNA-SeqV1.5.sh
+
 Step 3 - Run script
-/path/to/DNA-SeqV1.5.sh
-./DNA-SeqV1.5.sh (if already in directory)
+ (if not in the dierctory having the pipeline)
+ ./path/to/DNA-SeqV1.5.sh
+
+ (if already in directory)
+ ./DNA-SeqV1.5.sh 
 
 
 
 5. Files List
 
-The files required to run the pipeline include:
+The files (and their paths) required to run the pipeline include:
 •	FASTQ file(s) that is being converted into a VCF
 •	Barcode file 
 •	Reference genome
