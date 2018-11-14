@@ -26,6 +26,9 @@ read BAR
 echo "Location of Reference Genome file" 
 read REF
 
+echo "Enter Adaptor Seq"
+read ADAP
+
 echo
 echo "After the process is done ..."
 echo "Go to Directory DeMulti for Result!"
@@ -54,7 +57,6 @@ sabre se -f $FASTQ -b $BAR -u unk.fastq
 
 # Step 2: Cut the Adaptor from Sequences 
 
-ADAP=AGATCGGAA
 exec &> cutadapt.log
 parallel -j 4 cutadapt -a $ADAP -m 50 -o {}.fastq {}.fq ::: $(ls -1 *.fq | sed 's/.fq//')
 		if [ $? -ne 0 ]; then
