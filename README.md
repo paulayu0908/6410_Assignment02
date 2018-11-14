@@ -5,7 +5,7 @@ User Documentation for Bioinformatics Programming 6410 Pipeline - README
 
 Table of Contents 
 
-1…....................................................... Table of Contents 
+1........................................................ Table of Contents 
 
 2........................................................ Name, version, description, and/or features of the program
 
@@ -65,10 +65,10 @@ Step 3 - Run script
 
 5. Files List
 
-The files required to run the pipeline include:
-•	FASTQ file(s) that is being converted into a VCF
-•	Barcode file 
-•	Reference genome
+The files required to run the pipeline include: 
+•	FASTQ file(s) that is being converted into a VCF  
+•	Barcode file  
+•	Reference genome  
 
 
 
