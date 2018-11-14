@@ -5,7 +5,7 @@ User Documentation for Bioinformatics Programming 6410 Pipeline - README
 
 Table of Contents 
 
-1…........................................................Table of Contents 
+1…....................................................... Table of Contents 
 
 2........................................................ Name, version, description, and/or features of the program
 
@@ -51,10 +51,15 @@ Step 1 - Download from www.github/repository and save in your directory of choos
 
 Step 2 - Give executive permission to run script
 
-chmod +x /path/to/DNA-SeqV1.5.sh
-Step 3 - Run script
-/path/to/DNA-SeqV1.5.sh
-./DNA-SeqV1.5.sh (if already in directory)
+chmod +x /path/to/DNA-SeqV1.5.sh  
+
+Step 3 - Run script 
+  
+(if not in the dierctory having the pipeline)   
+./path/to/DNA-SeqV1.5.sh
+
+(if already in directory)   
+./DNA-SeqV1.5.sh
 
 
 
