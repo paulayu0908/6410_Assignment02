@@ -3,7 +3,7 @@
 User Documentation for Bioinformatics Programming 6410 Pipeline - README 
 --------------------------------------------------------------------------------------------------------------------------------
 
-1.Table of Contents 
+Table of Contents 
 
 1…........................................................Table of Contents 
 
