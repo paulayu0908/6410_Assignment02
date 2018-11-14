@@ -32,11 +32,11 @@ Software:
 Pipeline can be used in any unix-enabled computer OS including Windows, Linux, and Mac.
 
 Pre-installed packages: 
-For our pipeline script to run the following software tools must be installed
+For our pipeline script to run the following software tools must be installed   
 •	Sabre demultiplexing tool (obtained from https://github.com/najoshi/sabre)  
-•	Cutadapt adapter sequence remover (https://github.com/marcelm/cutadapt)
-•	Burrow-Wheeler Alignment (https://github.com/lh3/bwa)
-•	Samtools, htslib, and bcf tools packages (https://github.com/samtools/samtools)
+•	Cutadapt adapter sequence remover (https://github.com/marcelm/cutadapt) 
+•	Burrow-Wheeler Alignment (https://github.com/lh3/bwa) 
+•	Samtools, htslib, and bcf tools packages (https://github.com/samtools/samtools) 
 
 
 
@@ -65,7 +65,7 @@ Step 3 - Run script
 
 5. Files List
 
-The files required to run the pipeline include: 
+The files required to run the pipeline include:   
 •	FASTQ file(s) that is being converted into a VCF  
 •	Barcode file  
 •	Reference genome  
