@@ -6,10 +6,15 @@ User Documentation for Bioinformatics Programming 6410 Pipeline - README
 1.Table of Contents 
 
 1…........................................................Table of Contents 
+
 2........................................................ Name, version, description, and/or features of the program
+
 3........................................................ System requirements
+
 4........................................................ Install, uninstall, configuration, and operating instructions
+
 5........................................................ Files list
+
 6........................................................ Credit, acknowledgments, contact information, and copyright
 
 2. Name, version, description, and program features 
