@@ -34,8 +34,8 @@ Pipeline can be used in any unix-enabled computer OS including Windows, Linux, a
 Pre-installed packages: 
 For our pipeline script to run the following software tools must be installed   
 •	Sabre demultiplexing tool (obtained from https://github.com/najoshi/sabre)  
-•	Cutadapt adapter sequence remover (https://github.com/marcelm/cutadapt) 
-•	Burrow-Wheeler Alignment (https://github.com/lh3/bwa) 
+•	Cutadapt adapter sequence remover (https://github.com/marcelm/cutadapt)   
+•	Burrow-Wheeler Alignment (https://github.com/lh3/bwa)   
 •	Samtools, htslib, and bcf tools packages (https://github.com/samtools/samtools) 
 
 
