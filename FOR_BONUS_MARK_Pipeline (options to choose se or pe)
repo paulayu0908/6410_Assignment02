@@ -29,7 +29,7 @@ echo
 echo "Single-End (SE) or Paired-End (PE)? Type SE or PE" 
 read end
 
-case $case in 
+case $end in 
 	SE)
 		echo "We need an absolute path to your FASTQ file"
 		read FASTQ
@@ -61,6 +61,7 @@ case $case in
 
 		echo "We need your reverse adapter to remove"
 		read ADAP2
+		;;
 	*)
 		echo "Wrong Input!"
 		;;
@@ -88,9 +89,7 @@ sabre se -f $FASTQ -b $BAR -u unk.fastq
                         printf "Sabre Detected an Error: Exit and Check general.log"
                         exit 1
                 else
-                        printf "Demultiplexing by Sabre Complete
-
-" > general.log
+                        printf "Demultiplexing by Sabre Complete" > general.log
                 fi
 
 if [[ $end = PE ]];
@@ -101,8 +100,7 @@ sabre pe -f $FASTQ1 -r $FASTQ2 -b $BARCODE -u uknown1.fastq -w unknown2.fastq
 			printf "Sabre Detected an Error: Exit and Check pairedend.log"
 			exit 1
 		else
-			printf "Demultiplexing by Sabre Complete
-" > general_pe.log
+			printf "Demultiplexing by Sabre Complete" > general_pe.log
 		fi 
 
 
@@ -124,8 +122,7 @@ parallel -j 4 cutadapt -a $ADAP -m 50 -o {}.fastq {}.fq ::: $(ls -l *.fq | sed '
                                 printf "Cutadapt Detected an Error: Exit and Check general.log"
                                 exit 1
                 else
-                        printf "Removal of Adapter Sequences by Cutadapt Complete
-" >> general.log
+                        printf "Removal of Adapter Sequences by Cutadapt Complete" >> general.log
                 fi
 if [[ $end = PE ]];
 then
@@ -135,8 +132,7 @@ parallel -j 4 cutadapt -a $ADAP1 -A $ADAP2 -m 50 -o {}R1.fastq {}R1.fq ::: $(ls 
 				printf "Cutadapt Detected an Error: Exit and Check general.log"
 				exit 1
 		else
-			printf "Removal of Adaptor Sequences from R1 by Cutadapt Complete
-" >> general_pe.log
+			printf "Removal of Adaptor Sequences from R1 by Cutadapt Complete" >> general_pe.log
 		fi
 
 parallel -j 4 cutadapt -a $ADAPT1 -A $ADAPT2 -m 50 -o {}R2.fastq {}R2.fq ::: $(ls -l *R2.fq | sed 's/R2.fq//')
@@ -144,8 +140,7 @@ parallel -j 4 cutadapt -a $ADAPT1 -A $ADAPT2 -m 50 -o {}R2.fastq {}R2.fq ::: $(l
                                 printf "Cutadapt Detected an Error: Exit and Check general.log"
                                 exit 1
                 else
-                        printf "Removal of Adaptor Sequences from R2 by Cutadapt Complete
-" >> general_pe.log
+                        printf "Removal of Adaptor Sequences from R2 by Cutadapt Complete" >> general_pe.log
                 fi 
 
 #Step 5: Map Reads using BWA
@@ -161,8 +156,7 @@ parallel -j 3 bwa mem -t 2 $REF {}.fastq ">" {}.sam ::: $(ls -l *.fastq | sed 's
                 elif [ $? -ne 0 ];then
                                 printf "BWA Detected an Error: Exit and Check general.log"
                 else
-                                printf "Mapping of Reads Completed by BWA
-" >> general.log
+                                printf "Mapping of Reads Completed by BWA" >> general.log
                 fi
 
 if [[ $end = PE ]];
@@ -172,8 +166,7 @@ parallel -j 3 bwa mem -t 2 $REFERENCE  {}R1.fastq {}R2.fastq ">" {}.sam ::: $(ls
 		elif [ $? -ne 0 ];then
 				printf "BWA Detected an Error: Exit and Check pairedend.log"
 		else
-				printf "Mapping of Reads Completed by BWA
-" >> general_pe.log
+				printf "Mapping of Reads Completed by BWA" >> general_pe.log
 		fi
 
 #Step 6: Convert .SAM to .BAM using samtools view
@@ -185,8 +178,7 @@ parallel -j 4 samtools view -b -S -h {}.sam ">" {}.temp.bam ::: $(ls -1 *.sam | 
                                 printf "Samtools-Temp Detected an Error: Exit and Check general.log!"
                                 exit 1
                 else
-                                printf "Samtools has converted SAM into TEMP.BAM
-" >> general.log
+                                printf "Samtools has converted SAM into TEMP.BAM" >> general.log
                 fi
 
 
@@ -197,8 +189,7 @@ parallel -j 4 samtools sort {}.temp.bam -o {}.sort.bam ::: $(ls -1 *.temp.bam | 
                                 printf "Samtools-Sort Detected an Error: Exit and Check general.log!"
                                 exit 1
                 else
-                                printf "Samtools has sorted alignments
-" >> general.log
+                                printf "Samtools has sorted alignments" >> general.log
                 fi
 
 
@@ -208,8 +199,7 @@ parallel -j 4 samtools index {} ::: $(ls -1 *.sort.bam)
                                 printf "Samtools-Index Detected an Error: Exit and Check general.log!"
                                 exit 1
                 else
-                                printf "Samtools has completed indexing
-" >> general.log
+                                printf "Samtools has completed indexing" >> general.log
                 fi
 
 for i in $(ls -1 *.sort.bam)
@@ -220,21 +210,17 @@ for i in $(ls -1 *.sort.bam)
                                 exit 1
                 fi
 	done
-				printf "Bamlist Completed 
-" >> general.log
+				printf "Bamlist Completed" >> general.log
 
 #Step 9: Using Samtools to pileup the multiple BAM files.
 
-bamlist=/home/akaash/DeMulti/bamlist
-
-samtools mpileup -g -f $REF -b $bamlist > variants.bcf
+samtools mpileup -g -f $REF -b ./bamlist > variants.bcf
 
 	if [ $? -ne 0 ];then
 			printf "Samtools mpileup Detected an Error: Exit and Check general.log!"
 	exit 1
 	else
-			printf "Variant Calling by Samtools Complete
-" >>general.log
+			printf "Variant Calling by Samtools Complete" >>general.log
 	fi
 
 #Step 10: Convert BCF into VCF using BCFtools
@@ -245,10 +231,8 @@ bcftools call -mv variants.bcf > variants.vcf
                 printf "BCFtools Detected an Error: Exit and Check general.log!"
                 exit 1
                 else
-                                printf "BCF to VCF Conversion Complete by BCFtools
-" >> general.log
-                                printf "All Steps are Complete
-" >> general.log
+                                printf "BCF to VCF Conversion Complete by BCFtools" >> general.log
+                                printf "All Steps are Complete" >> general.log
         fi
 
 exit 0
